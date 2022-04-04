@@ -118,9 +118,29 @@
                             name="product_code">
                         </div>
                         <div class="form-group">
+                            <label for="">Entry Date</label><br>
+                            <input type="date" class="form-control"
+                            name="entry_date">
+                        </div>
+                        <div class="form-group">
                             <label for="">Product name</label>
                             <input type="text" class="form-control"
                             name="product_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Warehouse</label>
+                            <select class="form-control" name="warehouse" required>
+                                <?php
+                                $select = $pdo->prepare("SELECT * FROM tbl_category");
+                                $select->execute();
+                                while($row = $select->fetch(PDO::FETCH_ASSOC)){
+                                    extract($row)
+                                ?>
+                                    <option><?php echo $row['cat_name']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="">Category</label>
@@ -138,6 +158,11 @@
                             </select>
                         </div>
                         <!-- //min="1000" step="1000" -->
+                        <div class="form-group">
+                            <label for="">Per Box/Piece Price</label>
+                            <input type="text" class="form-control"
+                            name="box_price" required>
+                        </div>
                         <div class="form-group">
                             <label for="">Purchasing Price</label>
                             <input type="text" class="form-control"
@@ -163,6 +188,18 @@
                             class="form-control" name="min_stock" required>
                         </div>
                         <div class="form-group">
+                            <label for="">Vehicle Number</label><br>
+                            <input type="text" class="form-control" name="vehicle_number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Gate Pass</label><br>
+                            <input type="text" class="form-control" name="gate_pass" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Batch Number</label><br>
+                            <input type="text" class="form-control" name="batch_number" required>
+                        </div>
+                        <div class="form-group">
                             <label for="">Units</label>
                             <select class="form-control" name="satuan" required>
                                 <?php
@@ -172,6 +209,21 @@
                                     extract($row)
                                 ?>
                                     <option><?php echo $row['nm_satuan']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Supplier</label>
+                            <select class="form-control" name="supplier" required>
+                                <?php
+                                $select = $pdo->prepare("SELECT * FROM tbl_supplier");
+                                $select->execute();
+                                while($row = $select->fetch(PDO::FETCH_ASSOC)){
+                                    extract($row)
+                                ?>
+                                    <option><?php echo $row['name']; ?></option>
                                 <?php
                                 }
                                 ?>

@@ -24,8 +24,12 @@
 
     if(isset($_POST['submit'])){
 
+        $date = $_POST['date'];
         $username = $_POST['username'];
-        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        $cnic = $_POST['cnic'];
+        $mobile = $_POST['mobile'];
+        $address = $_POST['address'];
         $password = $_POST['password'];
         $role = $_POST['select_option'];
         $status = $_POST['status'];
@@ -45,12 +49,16 @@
                     </script>';
             } else {
                 //insert query here
-                $insert = $pdo->prepare("INSERT INTO tbl_user(username,fullname,password,role,is_active) VALUES(:name,:fullname,:pass,:role,1)");
+                $insert = $pdo->prepare("INSERT INTO tbl_user(date,username,email,cnic,mobile,address,password,role,is_active) VALUES(:date,:username,:email,:cnic,:mobile,:address,:password,:role,1)");
 
                 //binding the values parameter with input from user
-                $insert->bindParam(':name',$username);
-                $insert->bindParam(':fullname',$fullname);
-                $insert->bindParam(':pass',$password);
+                $insert->bindParam(':date',$date);
+                $insert->bindParam(':username',$username);
+                $insert->bindParam(':email',$email);
+                $insert->bindParam(':cnic',$cnic);
+                $insert->bindParam(':mobile',$mobile);
+                $insert->bindParam(':address',$address);
+                $insert->bindParam(':password',$password);
                 $insert->bindParam(':role',$role);
 
                 //if execution $insert
@@ -77,25 +85,41 @@
             <div class="col-md-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Register a New Account</h3>
+                        <h3 class="box-title">Register a New Staff</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
                         <div class="box-body">
                                 <div class="form-group">
+                                    <label for="username">Date</label>
+                                    <input type="date" class="form-control" id="username" name="date" placeholder="Enter Date" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="fname">Fullname</label>
-                                    <input type="text" class="form-control" id="fname" name="fullname" placeholder="Enter Full Name" required>
+                                    <label for="fname">E-mail</label>
+                                    <input type="email" class="form-control" id="fname" name="email" placeholder="Enter Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">CNIC</label>
+                                    <input type="text" class="form-control" id="username" name="cnic" placeholder="Enter Cnic" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Mobile Number</label>
+                                    <input type="text" class="form-control" id="username" name="mobile" placeholder="Enter Mobile" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Address</label>
+                                    <input type="text" class="form-control" id="username" name="address" placeholder="Enter Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="password" name="status" placeholder="Password" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" id="password" name="status" placeholder="Password" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Role </label>
@@ -116,7 +140,7 @@
             <div class="col-md-8">
             <div class="box">
                 <div class="box-header with-border">
-                <h3 class="box-title">User's detail</h3>
+                <h3 class="box-title">Staff detail</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -125,8 +149,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Username</th>
-                                    <th>Fullname</th>
+                                    <th>Date</th>
+                                    <th>Username</th>                                    
+                                    <th>E-mail</th>
+                                    <th>Cnic</th>
+                                    <th>Mobile</th>
+                                    <th>Address</th>
                                     <th>Role</th>
                                     <th>Action</th>
                                 </tr>
@@ -141,8 +169,12 @@
                                 ?>
                                     <tr>
                                     <td><?php echo $no++; ?></td>
+                                    <td><?php echo $row->date; ?></td>
                                     <td><?php echo $row->username; ?></td>
-                                    <td><?php echo $row->fullname; ?></td>
+                                    <td><?php echo $row->email; ?></td>
+                                    <td><?php echo $row->cnic; ?></td>
+                                    <td><?php echo $row->mobile; ?></td>
+                                    <td><?php echo $row->address; ?></td>
                                     <td><?php echo $row->role; ?></td>
                                     <td>
                                         <a href="register.php?id=<?php echo $row->user_id; ?>"

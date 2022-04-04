@@ -126,6 +126,20 @@
       <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">Menu</li>
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li><a href="./register.php"><i class="fa fa-users"></i> <span>Staff Management</span></a></li>
+        <li class="treeview">
+          <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
+            <i class="fa fa-gift"></i> <span>Product Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="./product.php"><i class="fa fa-gift"></i> <span>Product</span></a></li>
+            <li><a href="./category.php"><i class="fa fa-list-alt"></i> <span>Category</span></a></li>
+            <li><a href="./satuan.php"><i class="fa fa-balance-scale"></i> <span>Unit of product</span></a></li>
+          </ul>
+        </li>
         <li class="treeview">
           <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
             <i class="fa fa-dashboard"></i> <span>Sales</span>
@@ -167,23 +181,9 @@
             <li><a href="./warehouse.php"><i class="fa fa-home"></i> <span>Warehousing</span></a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
-            <i class="fa fa-gift"></i> <span>Product Detail</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="./product.php"><i class="fa fa-gift"></i> <span>Product</span></a></li>
-            <li><a href="./category.php"><i class="fa fa-list-alt"></i> <span>Category</span></a></li>
-            <li><a href="./satuan.php"><i class="fa fa-balance-scale"></i> <span>Unit of product</span></a></li>
-          </ul>
-        </li>
         <li><a href="./customer.php"><i class="fa fa-user"></i> <span>Customers</span></a></li>
         <li><a href="./supplier.php"><i class="fa fa-user-plus"></i> <span>Suppliers</span></a></li>          
         <li><a href="./expense.php"><i class="fa fa-money"></i> <span>Expense</span></a></li>
-        <li><a href="./register.php"><i class="fa fa-users"></i> <span>List of user</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
