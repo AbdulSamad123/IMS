@@ -29,6 +29,19 @@
       return $output;
     }
 
+    function fill_ware($pdo){
+      $output= '';
+
+      $select = $pdo->prepare("SELECT * FROM tbl_warehouse");
+      $select->execute();
+      $result = $select->fetchAll();
+
+      foreach($result as $row){
+        $output.='<option value="'.$row['war_id'].'">'.$row["war_name"].'</option>';
+      }
+
+      return $output;
+    }
     
     function fill_custom($pdo){
       $output= '';
@@ -49,14 +62,19 @@
 
     if(isset($_POST['save_purchase'])){
       $customer_id = $_POST['customer_id'];
-      $cashier_name = $_POST['cashier_name'];
+      $war_id = $_POST['war_id'];
       $order_date = date("Y-m-d",strtotime($_POST['orderdate']));
       $order_time = date("H:i", strtotime($_POST['timeorder']));
       $total = $_POST['total'];
+      $labour_exp = $_POST['labour_exp'];
+      $product_exp = $_POST['product_exp'];
       $discount = $_POST['discount'];     
       $paid = $_POST['paid'];
       $due = $_POST['due'];
       $credit = $_POST['credit'];
+      $bank_name = $_POST['bank_name'];
+      $account_no = $_POST['account_no'];
+      $cheque_no = $_POST['cheque_no'];
       $duedate = $_POST['duedate'];
 
       $arr_product_id =  $_POST['productid'];
@@ -79,18 +97,23 @@
       }else{
 
 
-        $insert = $pdo->prepare("INSERT INTO tbl_invoice(customer_id, cashier_name, order_date, time_order, total, discount, paid, due, credit, duedate)
-        values(:customer_id, :name, :orderdate, :timeorder, :total, :discount, :paid, :due, :credit, :duedate)");
+        $insert = $pdo->prepare("INSERT INTO tbl_invoice(customer_id, war_id, order_date, time_order, total, labour_exp, product_exp, discount, paid, due, credit, bank_name, account_no, cheque_no , duedate)
+        values(:customer_id, :war_id, :orderdate, :timeorder, :total,:labour_exp,:product_exp, :discount, :paid, :due, :credit, :bank_name, :account_no, :cheque_no, :duedate)");
 
         $insert->bindParam(':customer_id', $customer_id);
-        $insert->bindParam(':name', $cashier_name);
+        $insert->bindParam(':war_id', $war_id);
         $insert->bindParam(':orderdate',  $order_date);
         $insert->bindParam(':timeorder',  $order_time);
         $insert->bindParam(':total', $total);
+        $insert->bindParam(':labour_exp', $labour_exp);
+        $insert->bindParam(':product_exp', $product_exp);
         $insert->bindParam(':discount', $discount);
         $insert->bindParam(':paid', $paid);
         $insert->bindParam(':due', $due);
         $insert->bindParam(':credit', $credit);
+        $insert->bindParam(':bank_name', $bank_name);
+        $insert->bindParam(':account_no', $account_no);
+        $insert->bindParam(':cheque_no', $cheque_no);
         $insert->bindParam(':duedate', $duedate);
 
         $insert->execute();
@@ -155,30 +178,31 @@
     <section class="content container-fluid">
         <div class="box box-success">
           <form action="" method="POST">
-            <div class="box-body">
+            <div class="box-body"> 
             <div class="col-md-3">
                 <div class="form-group">
                   <label>Customer name</label>  
                   <div class="input-group">
-                            <div class="input-group-addon">
-                              <i class="fa fa-user"></i>
-                            </div>
-                            <select class="form-control pull-right" name="customer_id" required>
-                            <option value="">--Select Customer--</option><?php
-                             echo fill_custom($pdo)?></select>
-                            </div>
+                    <div class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </div>
+                    <select class="form-control pull-right" name="customer_id" required>
+                    <option value="">--Select Customer--</option><?php
+                      echo fill_custom($pdo)?></select>
+                  </div>
                   <!-- /.input group -->
                 </div>
               </div>
-
               <div class="col-md-3">
                 <div class="form-group">
-                  <label>Cashier name</label>
+                  <label>Warehouse name</label>  
                   <div class="input-group">
                     <div class="input-group-addon">
                       <i class="fa fa-user"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" name="cashier_name" value="<?php echo $_SESSION['username']; ?>" readonly>
+                    <select class="form-control pull-right" name="war_id" required>
+                    <option value="">--Select Warehouse--</option><?php
+                      echo fill_ware($pdo)?></select>
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -218,11 +242,18 @@
                           <th></th>
                           <th>Code</th>
                           <th>Name</th>
+                          <th>Quantity</th>
                           <th>Stock</th>
+                          <th>Per Box</th>
                           <th>Price</th>
-                          <th>Amount</th>
-                          <th>Unit</th>
                           <th>Total</th>
+                          <th>Unit</th>
+                          <th>Weight</th>
+                          <th>Gross Weight</th>
+                          <th>Average</th>
+                          <th>FRT</th>
+                          <th>TFRT</th>
+                          <th>TPT</th>
                           <th>
                             <button type="button" name="addOrder" class="btn btn-success btn-sm btn_addOrder" required><span>
                               <i class="fa fa-plus"></i>
@@ -250,6 +281,26 @@
                   <!-- /.input group -->
                 </div>
                 <div class="form-group">
+                  <label>Labour Expense</label>
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <span>Rp</span>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="labour_exp"  required>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                  <label>Product Expense</label>
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <span>Rp</span>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="product_exp"  required>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group">
                   <label>Discount</label>
                   <div class="input-group">
                     <div class="input-group-addon">
@@ -270,7 +321,7 @@
                   <!-- /.input group -->
                 </div>
                 <div class="form-group">
-                  <label>Balance</label>
+                  <label>Balance</label>  
                   <div class="input-group">
                     <div class="input-group-addon">
                       <span>Rp <?php echo $_SESSION['invoice_id']; ?></span>
@@ -287,7 +338,37 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Due Date</label>
+                  <label>Bank Name</label>
+                  <div class="input-group">
+                  <div class="input-group-addon">
+                      <i class="fa fa-bank"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="bank_name"  required>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                  <label>Account Numberr</label>
+                  <div class="input-group">
+                  <div class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="account_no"  required>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                  <label>Cheque Number</label>
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-money"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="cheque_no"  required>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                  <label>Cheque Date</label>
                   <div class="input-group">
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
@@ -335,12 +416,20 @@
         html+='<td><input type="hidden" class="form-control productcode" name="productcode[]" readonly></td>';
         html+='<td><select class="form-control productid" name="productid[]" style="width:100px;" required><option value="">--Select Product--</option><?php
         echo fill_product($pdo)?></select></td>';
-        html+='<td><input type="text" class="form-control productname" style="width:200px;" name="productname[]" readonly></td>';
-        html+='<td><input type="text" class="form-control productstock" style="width:50px;" name="productstock[]" readonly></td>';
-        html+='<td><input type="text" class="form-control productprice" style="width:100px;" name="productprice[]"></td>';
+        html+='<td><input type="text" class="form-control productname" style="width:200px;" name="productname[]"></td>';
         html+='<td><input type="number" class="form-control quantity_product" style="width:100px;" name="quantity[]" required></td>';
-        html+='<td><input type="text" class="form-control productsatuan" style="width:100px;" name="productsatuan[]" readonly></td>';
-        html+='<td><input type="text" class="form-control producttotal" style="width:150px;" name="producttotal[]" readonly></td>';
+        html+='<td><input type="text" class="form-control productstock" style="width:50px;" name="productstock[]"></td>';
+        html+='<td><input type="text" class="form-control perpiece" style="width:100px;" name="perpiece[]"></td>';
+        html+='<td><input type="text" class="form-control productprice" style="width:100px;" name="productprice[]"></td>';
+        html+='<td><input type="text" class="form-control producttotal" style="width:150px;" name="producttotal[]"></td>';
+        html+='<td><input type="text" class="form-control productsatuan" style="width:100px;" name="productsatuan[]"></td>';
+        html+='<td><input type="text" class="form-control productweight" style="width:100px;" name="productweight[]"></td>';
+        html+='<td><input type="text" class="form-control productgross" style="width:100px;" name="productgross[]"></td>';
+        html+='<td><input type="text" class="form-control productaverage" style="width:100px;" name="productaverage[]"></td>';
+        html+='<td><input type="text" class="form-control productfrt" style="width:100px;" name="productfrt[]"></td>';
+        html+='<td><input type="text" class="form-control producttfrt" style="width:100px;" name="producttfrt[]"></td>';
+        html+='<td><input type="text" class="form-control producttpt" style="width:100px;" name="producttpt[]"></td>';
+      //  html+='<td><input type="text" class="form-control productsubtotal" style="width:150px;" name="productsubtotal[]"></td>';
         html+='<td><button type="button" name="remove" class="btn btn-danger btn-sm btn-remove"><i class="fa fa-remove"></i></button></td>'
 
         $('#myOrder').append(html);
@@ -358,8 +447,15 @@
               tr.find(".productname").val(data["product_name"]);
               tr.find(".productstock").val(data["stock"]);
               tr.find(".productsatuan").val(data["product_satuan"]);
+              tr.find(".perpiece").val(data["per_piece"]);
               tr.find(".productprice").val(data["sell_price"]);
               tr.find(".quantity_product").val(0);
+              tr.find(".productweight").val(0);
+              tr.find(".productgross").val(0);
+              tr.find(".productaverage").val(0);
+              tr.find(".productfrt").val(0);
+              tr.find(".producttfrt").val(0);
+              tr.find(".producttpt").val(0);
               tr.find(".producttotal").val(tr.find(".quantity_product").val() * tr.find(".productprice").val());
               calculate(0,0);
             }

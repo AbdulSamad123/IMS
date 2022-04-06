@@ -10,10 +10,12 @@
 if(isset($_POST['edit_supplier'])){
       $ty = $_POST['name'];
       $dis = $_POST['address'];
+      $mb = $_POST['mobile'];
       $am = $_POST['balance'];
-      $update = $pdo->prepare("UPDATE tbl_supplier SET name='$ty', address='$dis', balance='$am' WHERE supplier_id='".$_GET['id']."' ");
+      $update = $pdo->prepare("UPDATE tbl_supplier SET name='$ty', address='$dis', mobile='$mb', balance='$am' WHERE supplier_id='".$_GET['id']."' ");
       $update->bindParam(':name', $ty);
       $update->bindParam(':address', $dis);
+      $update->bindParam(':mobile', $mb);
       $update->bindParam(':balance', $am);
       
       if($update->execute()){
@@ -35,6 +37,7 @@ if($id=$_GET['id']){
     $sup_id = $row->supplier_id;
     $sup_nm = $row->name;
     $sup_ad = $row->address;
+    $sup_mb = $row->mobile;
     $sup_bl = $row->balance;
 
 }else{
@@ -83,6 +86,12 @@ if($id=$_GET['id']){
                         </div>
                         <div class="form-group">
                             <label for="">Contact Number</label>
+                            <input type="text"
+                            class="form-control"
+                            name="mobile" value="<?php echo $sup_mb; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Balance</label>
                             <input type="text"
                             class="form-control"
                             name="balance" value="<?php echo $sup_bl; ?>" required>

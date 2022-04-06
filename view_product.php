@@ -36,14 +36,21 @@
 
                     <center><p class="list-group-item list-group-item-success">Product Detail</p></center>
                     <li class="list-group-item"> <b>Product Code</b>     :<span class="label badge pull-right"><?php echo $row->product_code; ?></span></li>
+                    <li class="list-group-item"> <b>Entry Date</b>     :<span class="label badge pull-right"><?php echo $row->entry_date; ?></span></li>
                     <li class="list-group-item"><b>Product Name</b>    :<span class="label label-info pull-right"><?php echo $row->product_name; ?></span></li>
+                    <li class="list-group-item"><b>Warehouse Name</b>    :<span class="label label-info pull-right"><?php echo $row->warehouse_name; ?></span></li>
                     <li class="list-group-item"><b>Product Category</b>        :<span class="label label-primary pull-right"><?php echo $row->product_category; ?></span></li>
+                    <li class="list-group-item"><b>Box Price</b>  :<span class="label label-warning pull-right">Rp. <?php echo $row->per_piece; ?></span></li>
                     <li class="list-group-item"><b>Buying Price</b>  :<span class="label label-warning pull-right">Rp. <?php echo $row->purchase_price; ?></span></li>
                     <li class="list-group-item"><b>Selling Price</b>     :<span class="label label-warning pull-right">Rp. <?php echo $row->sell_price; ?></span></li>
                     <li class="list-group-item"><b>Profit</b>           :<span class="label label-success pull-right">Rp. <?php echo $row->sell_price - $row->purchase_price; ?></span></li>
                     <li class="list-group-item"><b>Stock</b>          :<span class="label label-default pull-right"><?php echo $row->stock; ?></span></li>
                     <li class="list-group-item"><b>Minimum Stock</b>   :<span class="label label-default pull-right"><?php echo $row->min_stock; ?></span></li>
+                    <li class="list-group-item"><b>vehicle Number</b>  :<span class="label label-warning pull-right">Rp. <?php echo $row->vehicle_number; ?></span></li>
+                    <li class="list-group-item"><b>Gate Pass</b>  :<span class="label label-warning pull-right">Rp. <?php echo $row->gate_pass; ?></span></li>
+                    <li class="list-group-item"><b>Batch Number</b>  :<span class="label label-warning pull-right">Rp. <?php echo $row->batch_number; ?></span></li>
                     <li class="list-group-item"><b>Unit</b>               :<span class="label label-default pull-right"><?php echo $row->product_satuan; ?></span></li>
+                    <li class="list-group-item"><b>Supplier</b>               :<span class="label label-default pull-right"><?php echo $row->supplier; ?></span></li>
                     <li class="list-group-item"><b>Brief Description</b>    :</li>
                     <li class="list-group-item col-md-12"><span class="text-muted"><?php echo $row->description ?></span></li>
                   </ul>

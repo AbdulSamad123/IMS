@@ -13,13 +13,20 @@
 
     if(isset($_POST['add_product'])){
         $code = $_POST['product_code'];
+        $entry_date=$_POST['entry_date'];
         $product = $_POST['product_name'];
-        $category = $_POST['category'];
+        $warehouse_name = $_POST['warehouse_name'];
+        $product_category = $_POST['product_category'];
+        $per_piece = $_POST['per_piece'];
         $purchase = $_POST['purchase_price'];
         $sell = $_POST['sell_price'];
         $stock = $_POST['stock'];
         $min_stock = $_POST['min_stock'];
+        $vehicle_number = $_POST['vehicle_number'];
+        $gate_pass= $_POST['gate_pass'];
+        $batch_number = $_POST['batch_number'];
         $satuan = $_POST['satuan'];
+        $supplier = $_POST['supplier'];
         $desc = $_POST['description'];
 
 
@@ -46,17 +53,24 @@
             }
                         if(!isset($error)){
 
-                            $insert = $pdo->prepare("INSERT INTO tbl_product(product_code,product_name,product_category,purchase_price,sell_price,stock,min_stock,product_satuan,description)
-                            values(:product_code,:product_name,:product_category,:purchase_price,:sell_price,:stock,:min_stock,:satuan,:desc)");
+                            $insert = $pdo->prepare("INSERT INTO tbl_product(product_code,entry_date,product_name,warehouse_name,product_category,per_piece,purchase_price,sell_price,stock,min_stock,vehicle_number,gate_pass,batch_number,product_satuan,supplier,description)
+                            values(:product_code,:entry_date,:product_name,:warehouse_name,:product_category,:per_piece,:purchase_price,:sell_price,:stock,:min_stock,:vehicle_number,:gate_pass,:batch_number,:satuan,:supplier,:desc)");
 
                             $insert->bindParam(':product_code', $code);
+                            $insert->bindParam(':entry_date', $entry_date);
                             $insert->bindParam(':product_name', $product);
-                            $insert->bindParam(':product_category', $category);
+                            $insert->bindParam(':warehouse_name', $warehouse_name);
+                            $insert->bindParam(':product_category', $product_category);
+                            $insert->bindParam(':per_piece', $per_piece);
                             $insert->bindParam(':purchase_price', $purchase);
                             $insert->bindParam(':sell_price', $sell);
                             $insert->bindParam(':stock', $stock);
                             $insert->bindParam(':min_stock', $min_stock);
+                            $insert->bindParam(':vehicle_number', $vehicle_number);
+                            $insert->bindParam(':gate_pass', $gate_pass);
+                            $insert->bindParam(':batch_number', $batch_number);
                             $insert->bindParam(':satuan', $satuan);
+                            $insert->bindParam(':supplier', $supplier);
                             $insert->bindParam(':desc', $desc);
 
                             if($insert->execute()){
@@ -128,23 +142,23 @@
                             name="product_name">
                         </div>
                         <div class="form-group">
-                            <label for="">Warehouse</label>
-                            <select class="form-control" name="warehouse" required>
+                            <label for="">warehouse_name</label>
+                            <select class="form-control" name="warehouse_name">
                                 <?php
-                                $select = $pdo->prepare("SELECT * FROM tbl_category");
+                                $select = $pdo->prepare("SELECT * FROM tbl_warehouse");
                                 $select->execute();
                                 while($row = $select->fetch(PDO::FETCH_ASSOC)){
                                     extract($row)
                                 ?>
-                                    <option><?php echo $row['cat_name']; ?></option>
+                                    <option><?php echo $row['war_name']; ?></option>
                                 <?php
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Category</label>
-                            <select class="form-control" name="category" required>
+                            <label for="">product_category</label>
+                            <select class="form-control" name="product_category" >
                                 <?php
                                 $select = $pdo->prepare("SELECT * FROM tbl_category");
                                 $select->execute();
@@ -161,17 +175,17 @@
                         <div class="form-group">
                             <label for="">Per Box/Piece Price</label>
                             <input type="text" class="form-control"
-                            name="box_price" required>
+                            name="per_piece" >
                         </div>
                         <div class="form-group">
                             <label for="">Purchasing Price</label>
                             <input type="text" class="form-control"
-                            name="purchase_price" required>
+                            name="purchase_price" >
                         </div>
                         <div class="form-group">
                             <label for="">Selling Price</label>
                             <input type="text" class="form-control"
-                            name="sell_price" required>
+                            name="sell_price" >
                         </div>
                     </div>
 
@@ -180,28 +194,28 @@
                             <label for="">Stock</label><br>
                             <span class="text-muted">Units according to the product</span>
                             <input type="number" min="1" step="1"
-                            class="form-control" name="stock" required>
+                            class="form-control" name="stock" >
                         </div>
                         <div class="form-group">
                             <label for="">Minimun Stock</label><br>
                             <input type="number" min="1" step="1"
-                            class="form-control" name="min_stock" required>
+                            class="form-control" name="min_stock">
                         </div>
                         <div class="form-group">
                             <label for="">Vehicle Number</label><br>
-                            <input type="text" class="form-control" name="vehicle_number" required>
+                            <input type="text" class="form-control" name="vehicle_number">
                         </div>
                         <div class="form-group">
                             <label for="">Gate Pass</label><br>
-                            <input type="text" class="form-control" name="gate_pass" required>
+                            <input type="text" class="form-control" name="gate_pass">
                         </div>
                         <div class="form-group">
                             <label for="">Batch Number</label><br>
-                            <input type="text" class="form-control" name="batch_number" required>
+                            <input type="text" class="form-control" name="batch_number">
                         </div>
                         <div class="form-group">
                             <label for="">Units</label>
-                            <select class="form-control" name="satuan" required>
+                            <select class="form-control" name="satuan">
                                 <?php
                                 $select = $pdo->prepare("SELECT * FROM tbl_satuan");
                                 $select->execute();
@@ -216,7 +230,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Supplier</label>
-                            <select class="form-control" name="supplier" required>
+                            <select class="form-control" name="supplier">
                                 <?php
                                 $select = $pdo->prepare("SELECT * FROM tbl_supplier");
                                 $select->execute();
@@ -232,7 +246,7 @@
                         <div class="form-group">
                             <label for="">Product Brief Description</label>
                             <textarea name="description" id="description"
-                            cols="30" rows="10" class="form-control" required></textarea>
+                            cols="30" rows="10" class="form-control" ></textarea>
                         </div>
                     </div>
                  </div>   

@@ -3,7 +3,7 @@ require('../fpdf/fpdf.php');
 include_once'../db/connect_db.php';
 
 $id = $_GET['id'];
-$select = $pdo->prepare("SELECT tbl_customer.name ,tbl_invoice.invoice_id,tbl_invoice.cashier_name, tbl_invoice.order_date, tbl_invoice.time_order, tbl_invoice.total,tbl_invoice.discount,tbl_invoice.paid,tbl_invoice.due from tbl_invoice join tbl_customer on tbl_customer.customer_id=tbl_invoice.customer_id WHERE tbl_invoice.invoice_id=$id");
+$select = $pdo->prepare("SELECT tbl_customer.name,tbl_warehouse.war_name ,tbl_invoice.invoice_id, tbl_invoice.order_date, tbl_invoice.time_order, tbl_invoice.total,tbl_invoice.discount,tbl_invoice.paid,tbl_invoice.due from tbl_invoice join tbl_customer on tbl_customer.customer_id=tbl_invoice.customer_id join tbl_warehouse on tbl_warehouse.war_id=tbl_invoice.war_id WHERE tbl_invoice.invoice_id=$id");
 $select->execute();
 $row = $select->fetch(PDO::FETCH_OBJ);
 
@@ -43,10 +43,10 @@ $pdf->SetFont('Courier','BI',8);
 $pdf->Cell(20,4 ,$row->name,0,1,'C');
 
 $pdf->SetFont('Courier','B',8);
-$pdf->Cell(20,4 ,'Cashier Name :',0,0,'C');
+$pdf->Cell(20,4 ,'Warehouse Name :',0,0,'C');
 
 $pdf->SetFont('Courier','BI',8);
-$pdf->Cell(10,4 ,$row->cashier_name,0,1,'C');
+$pdf->Cell(10,4 ,$row->war_name,0,1,'C');
 
 $pdf->SetFont('Courier','B',8);
 $pdf->Cell(20,4 ,'Date & Time  :',0,0,'C');

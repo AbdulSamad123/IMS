@@ -140,7 +140,26 @@
             <li><a href="./satuan.php"><i class="fa fa-balance-scale"></i> <span>Unit of product</span></a></li>
           </ul>
         </li>
+        <li><a href="./warehouse.php"><i class="fa fa-home"></i> <span>Warehouse</span></a></li>
+        <li><a href="./customer.php"><i class="fa fa-user"></i> <span>Customers</span></a></li>
+        <li><a href="./supplier.php"><i class="fa fa-user-plus"></i> <span>Suppliers</span></a></li>          
+        <li><a href="./expense.php"><i class="fa fa-money"></i> <span>Expense</span></a></li>
         <li class="treeview">
+          <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
+            <i class="fa fa-truck"></i> <span>Vouchers</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li><a href="./order.php"><i class="fa fa-shopping-cart"></i> <span>Add Sale</span></a></li>
+              <li><a href="./purchase.php"><i class="fa fa-shopping-cart"></i> <span>Add Purchase</span></a></li>
+              <!-- <li><a href="./cus_balance.php"><i class="fa fa-bank"></i> <span>Customer Balance</span></a></li>
+              <li><a href="./report_sales.php"><i class="fa fa-newspaper-o"></i> <span>Sale Report</span></a></li>
+              <li><a href="./overall_report_sales.php"><i class="fa fa-newspaper-o"></i> <span>Overall Sale Report</span></a></li> -->
+          </ul>
+        </li>
+        <!-- <li class="treeview">
           <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
             <i class="fa fa-dashboard"></i> <span>Sales</span>
             <span class="pull-right-container">
@@ -153,8 +172,8 @@
               <li><a href="./report_sales.php"><i class="fa fa-newspaper-o"></i> <span>Sale Report</span></a></li>
               <li><a href="./overall_report_sales.php"><i class="fa fa-newspaper-o"></i> <span>Overall Sale Report</span></a></li>
           </ul>
-        </li>
-        <li class="treeview">
+        </li> -->
+        <!-- <li class="treeview">
           <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
             <i class="fa fa-truck"></i> <span>Purchase</span>
             <span class="pull-right-container">
@@ -167,6 +186,19 @@
             <li><a href="./report_purchase.php"><i class="fa fa-newspaper-o"></i> <span>Purchase Report</span></a></li>
             <li><a href="./overall_report_purchase.php"><i class="fa fa-newspaper-o"></i> <span>Overall Purchase Report</span></a></li>
           </ul>
+        </li> -->
+        <li class="treeview">
+          <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
+            <i class="fa fa-calculator"></i> <span>Account</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="./expense.php"><i class="fa fa-user"></i> <span>Payment</span></a></li>
+            <li><a href="./expense.php"><i class="fa fa-bank"></i> <span>Cheque</span></a></li> 
+            <li><a href="./expense.php"><i class="fa fa-money"></i> <span>Expense</span></a></li>
+          </ul>
         </li>
         <li class="treeview">
           <a href="#pagesmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down">
@@ -177,13 +209,9 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="./direct.php"><i class="fa fa-envelope-open"></i> <span>Add Direct Sale</span></a></li>
-            <li><a href="#"><i class="fa fa-newspaper-o"></i> <span>Report</span></a></li>
-            <li><a href="./warehouse.php"><i class="fa fa-home"></i> <span>Warehousing</span></a></li>
+            <!-- <li><a href="#"><i class="fa fa-newspaper-o"></i> <span>Report</span></a></li> -->
           </ul>
         </li>
-        <li><a href="./customer.php"><i class="fa fa-user"></i> <span>Customers</span></a></li>
-        <li><a href="./supplier.php"><i class="fa fa-user-plus"></i> <span>Suppliers</span></a></li>          
-        <li><a href="./expense.php"><i class="fa fa-money"></i> <span>Expense</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

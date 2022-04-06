@@ -10,15 +10,17 @@
 
         $name = $_POST['name'];
         $address = $_POST['address'];
+        $mobile = $_POST['mobile'];
         $balance = $_POST['balance'];
         
         //insert query here
         
-        $insert = $pdo->prepare("INSERT INTO tbl_customer(name,address,balance) VALUES(:name,:address,:balance)");
+        $insert = $pdo->prepare("INSERT INTO tbl_customer(name,address,mobile,balance) VALUES(:name,:address,:mobile,:balance)");
 
         //binding the values parameter with input from user
         $insert->bindParam(':name',$name);
         $insert->bindParam(':address',$address);
+        $insert->bindParam(':mobile',$mobile);
         $insert->bindParam(':balance',$balance);
 
         //if execution $insert
@@ -65,7 +67,12 @@
                             name="address" required>
                         </div>
                         <div class="form-group">
-                            <label for="">Contact Number</label>
+                            <label for="">Mobile</label>
+                            <input type="text" class="form-control"
+                            name="mobile" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Balance</label>
                             <input type="text" class="form-control"
                             name="balance" required>
                         </div>                        

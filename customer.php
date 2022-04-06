@@ -39,6 +39,7 @@
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Contact No</th>
+                                <th>Balance</th>
                                 <th>Action</th>
                             </tr>
 
@@ -54,6 +55,7 @@
                                 <td><?php echo $no++ ;?></td>
                                 <td><?php echo $row->name; ?></td>
                                 <td><?php echo $row->address; ?></td>
+                                <td><?php echo $row->mobile; ?></td>
                                 <td><?php echo $row->balance;?></td>
                                                                <td>
                                     <?php if($_SESSION['role']=="Admin"){ ?>

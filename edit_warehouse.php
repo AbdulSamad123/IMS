@@ -7,9 +7,11 @@
 
 
 if(isset($_POST['btn_edit'])){
-      $war = $_POST['war'];
-      $update = $pdo->prepare("UPDATE tbl_warehouse SET war_name='$war' WHERE war_id='".$_GET['id']."' ");
-      $update->bindParam(':war_name', $war);
+      $war_name = $_POST['war_name'];
+      $war_city = $_POST['war_city'];
+      $update = $pdo->prepare("UPDATE tbl_warehouse SET war_name='$war_name', war_city='$war_city' WHERE war_id='".$_GET['id']."' ");
+      $update->bindParam(':war_name', $war_name);
+      $update->bindParam(':war_city', $war_city);
       if($update->rowCount() > 0){
         echo'<script type="text/javascript">
         jQuery(function validation(){
@@ -35,6 +37,7 @@ if($id=$_GET['id']){
     $select->execute();
     $row = $select->fetch(PDO::FETCH_OBJ);
     $sat_name = $row->war_name;
+    $sat_city = $row->war_city;
 }else{
     header('location:warehouse.php');
 }
@@ -64,8 +67,13 @@ if($id=$_GET['id']){
                   <div class="box-body">
                     <div class="form-group">
                       <label for="category">Warehouse name</label>
-                      <input type="text" class="form-control" name="war" placeholder="Warehouse name"
+                      <input type="text" class="form-control" name="war_name" placeholder="Warehouse name"
                       value="<?php echo $sat_name; ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="category">Warehouse City</label>
+                      <input type="text" class="form-control" name="war_city" placeholder="Warehouse name"
+                      value="<?php echo $sat_city; ?>" required>
                     </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
@@ -88,6 +96,7 @@ if($id=$_GET['id']){
                   <tr>
                       <th>No</th>
                       <th>Warehouse name</th>
+                      <th>Warehouse city</th>
                   </tr>
               </thead>
               <tbody>
@@ -99,6 +108,7 @@ if($id=$_GET['id']){
                 <tr>
                     <td><?php echo $no++    ;?></td>
                     <td><?php echo $row->war_name; ?></td>
+                    <td><?php echo $row->war_city; ?></td>
                 </tr>
               <?php
               }

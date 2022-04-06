@@ -7,10 +7,11 @@ header('location:index.php');
 include_once'inc/header_all.php';
 
 if(isset($_POST['submit'])){
-    $war = $_POST['war'];
-    if(isset($_POST['war'])){
+    $war_name = $_POST['war_name'];
+    $war_city = $_POST['war_city'];
+    if(isset($_POST['war_name'])){
 
-            $select = $pdo->prepare("SELECT war_name FROM tbl_warehouse WHERE war_name='$war'");
+            $select = $pdo->prepare("SELECT war_name FROM tbl_warehouse WHERE war_name='$war_name'");
             $select->execute();
 
             if($select->rowCount() > 0 ){
@@ -22,9 +23,10 @@ if(isset($_POST['submit'])){
                     });
                     </script>';
                 }else{
-                    $insert = $pdo->prepare("INSERT INTO tbl_warehouse(war_name) VALUES(:war)");
+                    $insert = $pdo->prepare("INSERT INTO tbl_warehouse(war_name,war_city) VALUES(:war_name,:war_city)");
 
-                    $insert->bindParam(':war', $war);
+                    $insert->bindParam(':war_name', $war_name);
+                    $insert->bindParam(':war_city', $war_city);
 
                     if($insert->execute()){
                         echo '<script type="text/javascript">
@@ -62,7 +64,11 @@ if(isset($_POST['submit'])){
                   <div class="box-body">
                     <div class="form-group">
                       <label for="category">Warehouse Name</label>
-                      <input type="text" class="form-control" name="war" placeholder="Enter Warehouse">
+                      <input type="text" class="form-control" name="war_name" placeholder="Enter Warehouse">
+                    </div>
+                    <div class="form-group">
+                      <label for="category">Warehouse City</label>
+                      <input type="text" class="form-control" name="war_city" placeholder="Enter City">
                     </div>
                   </div><!-- /.box-body -->
                   <div class="box-footer">
@@ -84,6 +90,7 @@ if(isset($_POST['submit'])){
                     <tr>
                         <th>No</th>
                         <th>Warehouse Name</th>
+                        <th>Warehouse City</th>
                         <th>Action</th>
                     </tr>
 
@@ -97,6 +104,7 @@ if(isset($_POST['submit'])){
                   <tr>
                     <td><?php echo $no ++ ?></td>
                     <td><?php echo $row->war_name; ?></td>
+                    <td><?php echo $row->war_city; ?></td>
                     <td>
                         <a href="edit_warehouse.php?id=<?php echo $row->war_id; ?>"
                         class="btn btn-info btn-sm" name="btn_edit"><i class="fa fa-pencil"></i></a>
